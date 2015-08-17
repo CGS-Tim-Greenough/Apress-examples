@@ -13,6 +13,7 @@
 		467FE9C41B81761C0072006F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 467FE9C31B81761C0072006F /* Images.xcassets */; };
 		467FE9C71B81761C0072006F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 467FE9C51B81761C0072006F /* LaunchScreen.xib */; };
 		467FE9D31B81761C0072006F /* SectionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467FE9D21B81761C0072006F /* SectionsTests.swift */; };
+		467FE9DD1B81C4250072006F /* sortednames.plist in Resources */ = {isa = PBXBuildFile; fileRef = 467FE9DC1B81C4250072006F /* sortednames.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		467FE9CC1B81761C0072006F /* SectionsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SectionsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		467FE9D11B81761C0072006F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		467FE9D21B81761C0072006F /* SectionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionsTests.swift; sourceTree = "<group>"; };
+		467FE9DC1B81C4250072006F /* sortednames.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sortednames.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 				467FE9C01B81761C0072006F /* Main.storyboard */,
 				467FE9C31B81761C0072006F /* Images.xcassets */,
 				467FE9C51B81761C0072006F /* LaunchScreen.xib */,
+				467FE9DC1B81C4250072006F /* sortednames.plist */,
 				467FE9BA1B81761C0072006F /* Supporting Files */,
 			);
 			path = Sections;
@@ -192,6 +195,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				467FE9DD1B81C4250072006F /* sortednames.plist in Resources */,
 				467FE9C21B81761C0072006F /* Main.storyboard in Resources */,
 				467FE9C71B81761C0072006F /* LaunchScreen.xib in Resources */,
 				467FE9C41B81761C0072006F /* Images.xcassets in Resources */,
