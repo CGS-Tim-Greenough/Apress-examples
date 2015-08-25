@@ -14,6 +14,7 @@ class ViewController: UIViewController, UITableViewDataSource {
     var names : [String : [String]]!
     var keys : [String]!
     @IBOutlet weak var tableView : UITableView!
+    var searchController : UISearchController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,17 @@ class ViewController: UIViewController, UITableViewDataSource {
         // 'as' replaced with 'as!' due to error
         names = namesDict as! [String : [String]]
         keys = sorted(namesDict!.allKeys as! [String])
+        
+        let resultsController = SearchResultsController()
+        resultsController.names = names
+        resultsController.keys = keys
+        searchController = UISearchController(searchResultsController: resultsController)
+        let searchBar = searchController.searchBar
+        searchBar.scopeButtonTitles = ["All", "Short", "Long"]
+        searchBar.placeholder = "Enter a search term"
+        searchBar.sizeToFit()
+        tableView.tableHeaderView = searchBar
+        searchController.searchResultsUpdater = resultsController
     }
     
     // MARK: Table View Data Source methods
