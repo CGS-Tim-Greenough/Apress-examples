@@ -8,11 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		46C613561B8C5330001A83B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C613551B8C5330001A83B6 /* AppDelegate.swift */; };
-		46C613581B8C5330001A83B6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C613571B8C5330001A83B6 /* ViewController.swift */; };
 		46C6135B1B8C5330001A83B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46C613591B8C5330001A83B6 /* Main.storyboard */; };
 		46C6135D1B8C5330001A83B6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46C6135C1B8C5330001A83B6 /* Images.xcassets */; };
 		46C613601B8C5330001A83B6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46C6135E1B8C5330001A83B6 /* LaunchScreen.xib */; };
 		46C6136C1B8C5330001A83B6 /* FontsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C6136B1B8C5330001A83B6 /* FontsTests.swift */; };
+		46C613761B8C57C2001A83B6 /* FavouritesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C613751B8C57C2001A83B6 /* FavouritesList.swift */; };
+		46C81B211B8C5EDB00659515 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C81B201B8C5EDB00659515 /* RootViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,13 +30,14 @@
 		46C613501B8C5330001A83B6 /* Fonts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fonts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46C613541B8C5330001A83B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		46C613551B8C5330001A83B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		46C613571B8C5330001A83B6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		46C6135A1B8C5330001A83B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		46C6135C1B8C5330001A83B6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		46C6135F1B8C5330001A83B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		46C613651B8C5330001A83B6 /* FontsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FontsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		46C6136A1B8C5330001A83B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		46C6136B1B8C5330001A83B6 /* FontsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsTests.swift; sourceTree = "<group>"; };
+		46C613751B8C57C2001A83B6 /* FavouritesList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavouritesList.swift; sourceTree = "<group>"; };
+		46C81B201B8C5EDB00659515 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,7 +80,8 @@
 			isa = PBXGroup;
 			children = (
 				46C613551B8C5330001A83B6 /* AppDelegate.swift */,
-				46C613571B8C5330001A83B6 /* ViewController.swift */,
+				46C81B201B8C5EDB00659515 /* RootViewController.swift */,
+				46C613751B8C57C2001A83B6 /* FavouritesList.swift */,
 				46C613591B8C5330001A83B6 /* Main.storyboard */,
 				46C6135C1B8C5330001A83B6 /* Images.xcassets */,
 				46C6135E1B8C5330001A83B6 /* LaunchScreen.xib */,
@@ -212,8 +215,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				46C613581B8C5330001A83B6 /* ViewController.swift in Sources */,
+				46C613761B8C57C2001A83B6 /* FavouritesList.swift in Sources */,
 				46C613561B8C5330001A83B6 /* AppDelegate.swift in Sources */,
+				46C81B211B8C5EDB00659515 /* RootViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,6 +415,7 @@
 				46C613711B8C5330001A83B6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		46C613721B8C5330001A83B6 /* Build configuration list for PBXNativeTarget "FontsTests" */ = {
 			isa = XCConfigurationList;
@@ -419,6 +424,7 @@
 				46C613741B8C5330001A83B6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
