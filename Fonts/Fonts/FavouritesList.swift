@@ -45,4 +45,11 @@ class FavouritesList {
         defaults.setObject(favourites, forKey: "favourites")
         defaults.synchronize()
     }
+    
+    func moveItem(fromIndex from : Int, toIndex to : Int) {
+        let item = favourites[from]
+        favourites.removeAtIndex(from)
+        favourites.insert(item, atIndex: to)
+        saveFavourites()
+    }
 }

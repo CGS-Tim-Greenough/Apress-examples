@@ -8,90 +8,110 @@
 
 import UIKit
 
-class FontListViewController: UITableViewController {
+class FontListViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    var fontNames : [String] = []
+    var showsFavourites = false
+    private var cellPointSize : CGFloat!
+    private let cellIdentifier = "FontName"
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        let preferredTableViewFont = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+        cellPointSize = preferredTableViewFont.pointSize
+        
+        if showsFavourites {
+            navigationItem.rightBarButtonItem = editButtonItem()
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func fontForDisplay(atIndexPath indexPath : NSIndexPath) -> UIFont {
+        let fontName = fontNames[indexPath.row]
+        return UIFont(name: fontName, size: cellPointSize)!
+    }
 
     // MARK: - Table view data source
-
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
-        return 0
-    }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 0
+        return fontNames.count
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if showsFavourites {
+            fontNames = FavouritesList.sharedFavouriteList.favourites
+            
+            tableView.reloadData()
+        }
     }
 
-    /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! UITableViewCell
 
         // Configure the cell...
+        
+        // ! added after error
+        cell.textLabel!.font = fontForDisplay(atIndexPath: indexPath)
+        // ! added after error
+        cell.textLabel!.text = fontNames[indexPath.row]
+        cell.detailTextLabel?.text = fontNames[indexPath.row]
 
         return cell
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
+    
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the specified item to be editable.
-        return true
+        return showsFavourites
     }
-    */
-
-    /*
-    // Override to support editing the table view.
+    
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
+        if !showsFavourites {
+            return
+        }
+        
+        if editingStyle == UITableViewCellEditingStyle.Delete {
             // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+            let favourite = fontNames[indexPath.row]
+            FavouritesList.sharedFavouriteList.removeFavourite(favourite)
+            fontNames = FavouritesList.sharedFavouriteList.favourites
+            
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+        }
+        
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
+    
+    override func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+        FavouritesList.sharedFavouriteList.moveItem(fromIndex: sourceIndexPath.row, toIndex: destinationIndexPath.row)
+        fontNames = FavouritesList.sharedFavouriteList.favourites
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
+    
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
+        
+        let tableViewCell = sender as! UITableViewCell
+        let indexPath = tableView.indexPathForCell(tableViewCell)!
+        let font = fontForDisplay(atIndexPath: indexPath)
+        
+        if segue.identifier == "ShowFontSizes" {
+            let sizesVC = segue.destinationViewController as! FontSizesViewController
+            sizesVC.title = font.fontName
+            sizesVC.font = font
+        } else {
+            let infoVC = segue.destinationViewController as! FontInfoViewController
+            infoVC.font = font
+            infoVC.favourite = contains(FavouritesList.sharedFavouriteList.favourites, font.fontName)
+        }
     }
-    */
-
+    
 }

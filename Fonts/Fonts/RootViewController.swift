@@ -14,7 +14,8 @@ class RootViewController: UITableViewController, UITableViewDataSource, UITableV
     private var cellPointSize: CGFloat!
     private var favouritesList: FavouritesList!
     private let familyCell = "FamilyName"
-    private let favouritesCell = "Favorites"
+    // Next time, use American spelling as a rule...
+    private let favouritesCell = "Favourites"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,19 +51,18 @@ class RootViewController: UITableViewController, UITableViewDataSource, UITableV
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-                // The font names list
-                // ! added after error
-                let cell = tableView.dequeueReusableCellWithIdentifier(familyCell, forIndexPath : indexPath) as! UITableViewCell
-                // ! added after error
-                cell.textLabel!.font = fontForDisplay(atIndexPath: indexPath)
-                // ! added after error
-                cell.textLabel!.text = familyNames[indexPath.row]
-                cell.detailTextLabel?.text = familyNames[indexPath.row]
-                return cell
-            } else {
-                // The favourites list
-                // ! added after error
-                return tableView.dequeueReusableCellWithIdentifier(favouritesCell, forIndexPath : indexPath) as! UITableViewCell
+            // The font names list
+            // ! added after error
+            let cell = tableView.dequeueReusableCellWithIdentifier(familyCell, forIndexPath : indexPath) as! UITableViewCell
+            // ! added after error
+            cell.textLabel!.font = fontForDisplay(atIndexPath: indexPath)
+            // ! added after error
+            cell.textLabel!.text = familyNames[indexPath.row]
+            cell.detailTextLabel?.text = familyNames[indexPath.row]
+            return cell
+        } else {
+            // The favourites list
+            return tableView.dequeueReusableCellWithIdentifier(favouritesCell, forIndexPath : indexPath) as! UITableViewCell
         }
     }
     
@@ -74,12 +74,33 @@ class RootViewController: UITableViewController, UITableViewDataSource, UITableV
     func fontForDisplay(atIndexPath indexPath : NSIndexPath) -> UIFont? {
             if indexPath.section == 0 {
                 let familyName = familyNames[indexPath.row]
-                // ! added after error
                 let fontName = UIFont.fontNamesForFamilyName(familyName).first as! String
                 return UIFont(name: fontName, size: cellPointSize)
             } else {
                 return nil
             }
+    }
+    
+    // MARK: Navigation
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the bew view controller using [segue destinationViewController]
+        // Pass the selected object to the new view controller
+        let indexPath = tableView.indexPathForCell(sender as! UITableViewCell)!
+        let listVC = segue.destinationViewController as! FontListViewController
+        
+        if indexPath.section == 0 {
+            // Font names list
+            let familyName = familyNames[indexPath.row]
+            listVC.fontNames = sorted(UIFont.fontNamesForFamilyName(familyName) as! [String])
+            listVC.navigationItem.title = familyName
+            listVC.showsFavourites = false
+        } else {
+            // Favourites list
+            listVC.fontNames = favouritesList.favourites
+            listVC.navigationItem.title = "Favourites"
+            listVC.showsFavourites = true
+        }
     }
 
 }
